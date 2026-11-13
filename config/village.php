@@ -5,7 +5,7 @@ $img = fn ($seed, $w = 800, $h = 600) => "https://picsum.photos/seed/{$seed}/{$w
 return [
     'name' => 'Berkah Bahagia',
     'logo' => 'images/logo.png',
-    'tagline' => 'Kecamatan — Kabupaten — Provinsi',
+    'tagline' => 'Sidorejo - Hambalang - Sumatera Timur',
     'images' => ['hero' => $img('desa-hero', 1200, 900), 'profile' => $img('desa-profil', 900, 700)],
 
     'stats' => [ // dummy values
@@ -23,10 +23,10 @@ return [
     ],
 
     'news' => [
-        ['category' => 'Berita', 'date' => '1 Januari 2026', 'title' => 'Judul berita utama desa ditampilkan di sini', 'excerpt' => 'Ringkasan singkat berita sebagai contoh tampilan. Ganti dengan berita sebenarnya.', 'image' => $img('berita-1', 1000, 700), 'url' => '#'],
-        ['category' => 'Pengumuman', 'date' => '1 Januari 2026', 'title' => 'Contoh judul pengumuman penting', 'excerpt' => 'Ringkasan pengumuman contoh.', 'image' => $img('berita-2', 600, 400), 'url' => '#'],
-        ['category' => 'Informasi', 'date' => '1 Januari 2026', 'title' => 'Contoh judul informasi publik', 'excerpt' => 'Ringkasan informasi contoh.', 'image' => $img('berita-3', 600, 400), 'url' => '#'],
-        ['category' => 'Berita', 'date' => '1 Januari 2026', 'title' => 'Contoh judul kegiatan warga', 'excerpt' => 'Ringkasan kegiatan contoh.', 'image' => $img('berita-4', 600, 400), 'url' => '#'],
+        ['category' => 'Berita', 'date' => '1 Januari 2026', 'title' => 'SIPADES (SISTEM INFORMASI TRANSPARANSI DAN ANGGARAN DESA) TELAH RESMI DIRILIS', 'excerpt' => 'Hari ini telah resmi website SIPADES di publikasi, dengan tujuan untuk transparansi anggaran desa', 'image' => 'images/berita-web.png', 'url' => 'images/berita-web.png'],
+        ['category' => 'Pengumuman', 'date' => '1 Januari 2026', 'title' => 'PEMBERITAHUAN PAJAK PBB UNTUK DESA BERKAH BAHAGIA', 'excerpt' => 'Hari ini pembayaran pajak pbb masih berlangsung untuk desa berkah bahagia', 'image' => 'images/pajakpbb.webp', 'url' => 'images/pajakpbb.webp'],
+        ['category' => 'Informasi', 'date' => '1 Januari 2026', 'title' => 'MUSDES LPJ BUMDES T.A 2025 DESA BERKAH BAHAGIA', 'excerpt' => 'Pemerintah Desa berkah bahagia telah melaksanakan Musyawarah Desa', 'image' =>'images/musdes.webp', 'url' => 'images/musdes.webp'],
+        ['category' => 'Berita', 'date' => '1 Januari 2026', 'title' => 'PILKADES BERKAH BAHAGIA KAMIS, 12 NOVEMBER 2026', 'excerpt' => 'Telah dilaksanakan pemilihan kepala desa, kandidat sebanyak 3 orang', 'image' =>'images/pilkades.jpeg', 'url' => 'images/pilkades.jpeg'],
     ],
 
     'potentials' => [
