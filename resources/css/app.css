@@ -1,9 +1,56 @@
 @import 'tailwindcss';
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
+:root {
+  --bg: #F7F6F9; --surface: #FFFFFF; --soft: #E8F0E8;
+  --forest: #166534; --deep: #18503D; --light: #DCFCE7;
+  --amber: #F59E0B; --warn-bg: #FEF3C7; --warn-text: #B45309;
+  --ink: #1b2a22; --muted: #52605a; --line: #dfe5df;
+}
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+body { background: var(--bg); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; line-height: 1.65; }
+h1, h2, h3, .font-display { font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; letter-spacing: -0.02em; line-height: 1.2; }
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+.bg-surface { background: var(--surface); } .bg-soft { background: var(--soft); }
+.bg-forest { background: var(--forest); } .bg-deep { background: var(--deep); }
+.bg-light { background: var(--light); }
+.text-forest { color: var(--forest); } .text-deep { color: var(--deep); } .text-muted { color: var(--muted); }
+
+.container-x { width: min(100% - 2.5rem, 72rem); margin-inline: auto; }
+.section { padding-block: clamp(3.5rem, 8vw, 6rem); }
+
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: .75rem; overflow: hidden;
+  transition: transform .2s ease, border-color .2s ease; }
+.card:hover { transform: translateY(-3px); border-color: var(--forest); }
+.badge { display: inline-block; background: var(--light); color: var(--forest); font-size: .75rem; font-weight: 600;
+  padding: .15rem .6rem; border-radius: 999px; }
+.badge-warn { background: var(--warn-bg); color: var(--warn-text); }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .4rem; font-weight: 600; font-size: .9rem;
+  padding: .7rem 1.25rem; border-radius: .5rem; transition: background .2s, color .2s, border-color .2s; }
+.btn-primary { background: var(--forest); color: #fff; }
+.btn-primary:hover { background: var(--deep); }
+.btn-ghost { border: 1.5px solid var(--forest); color: var(--forest); }
+.btn-ghost:hover { background: var(--forest); color: #fff; }
+.link { color: var(--deep); font-weight: 600; font-size: .875rem; }
+.link:hover { text-decoration: underline; }
+:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
+
+.nav-link { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 500; font-size: .9rem; color: var(--muted); padding: .35rem .1rem;
+  border-bottom: 2px solid transparent; transition: color .2s, border-color .2s; }
+.nav-link:hover, .nav-link.active { color: var(--deep); border-color: var(--forest); }
+#navbar { transition: box-shadow .25s ease; }
+#navbar.scrolled { box-shadow: 0 1px 12px rgb(24 80 61 / .12); }
+
+.img-cover { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
+.card:hover .img-cover, .gal-item:hover .img-cover { transform: scale(1.04); }
+
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.in { opacity: 1; transform: none; }
+dialog#lightbox { border: 0; border-radius: .75rem; padding: 0; max-width: min(92vw, 60rem); background: var(--surface); }
+dialog#lightbox::backdrop { background: rgb(10 30 20 / .75); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .card, .img-cover, .btn { transition: none; }
 }
