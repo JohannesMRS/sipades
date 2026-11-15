@@ -6,7 +6,7 @@
   --amber: #F59E0B; --warn-bg: #FEF3C7; --warn-text: #B45309;
   --ink: #1b2a22; --muted: #52605a; --line: #dfe5df;
 }
-html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
 body { background: var(--bg); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; line-height: 1.65; }
 h1, h2, h3, .font-display { font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; letter-spacing: -0.02em; line-height: 1.2; }
 
@@ -15,42 +15,65 @@ h1, h2, h3, .font-display { font-family: 'Plus Jakarta Sans', 'Inter', sans-seri
 .bg-light { background: var(--light); }
 .text-forest { color: var(--forest); } .text-deep { color: var(--deep); } .text-muted { color: var(--muted); }
 
-.container-x { width: min(100% - 2.5rem, 72rem); margin-inline: auto; }
-.section { padding-block: clamp(3.5rem, 8vw, 6rem); }
+.container-x { width: min(100% - 2rem, 72rem); margin-inline: auto; }
+.section { padding-block: clamp(3rem, 8vw, 5.5rem); }
 
-.card { background: var(--surface); border: 1px solid var(--line); border-radius: .75rem; overflow: hidden;
-  transition: transform .2s ease, border-color .2s ease; }
-.card:hover { transform: translateY(-3px); border-color: var(--forest); }
-.badge { display: inline-block; background: var(--light); color: var(--forest); font-size: .75rem; font-weight: 600;
-  padding: .15rem .6rem; border-radius: 999px; }
-.badge-warn { background: var(--warn-bg); color: var(--warn-text); }
-
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: .4rem; font-weight: 600; font-size: .9rem;
-  padding: .7rem 1.25rem; border-radius: .5rem; transition: background .2s, color .2s, border-color .2s; }
+/* Buttons: min 44px tall for touch */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .4rem; font-weight: 600; font-size: .95rem;
+  min-height: 2.75rem; padding: .6rem 1.25rem; border-radius: .5rem; transition: background .2s, color .2s, border-color .2s; }
 .btn-primary { background: var(--forest); color: #fff; }
 .btn-primary:hover { background: var(--deep); }
 .btn-ghost { border: 1.5px solid var(--forest); color: var(--forest); }
 .btn-ghost:hover { background: var(--forest); color: #fff; }
-.link { color: var(--deep); font-weight: 600; font-size: .875rem; }
-.link:hover { text-decoration: underline; }
+.btn-light { background: #fff; color: var(--deep); }
+.btn-light:hover { background: var(--light); }
+.btn-outline-light { border: 1.5px solid rgb(255 255 255 / .7); color: #fff; }
+.btn-outline-light:hover { background: rgb(255 255 255 / .15); }
 :focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
 
-.nav-link { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 500; font-size: .9rem; color: var(--muted); padding: .35rem .1rem;
-  border-bottom: 2px solid transparent; transition: color .2s, border-color .2s; }
-.nav-link:hover, .nav-link.active { color: var(--deep); border-color: var(--forest); }
-#navbar { transition: box-shadow .25s ease; }
-#navbar.scrolled { box-shadow: 0 1px 12px rgb(24 80 61 / .12); }
+/* Navbar: transparent on top of the hero, solid after scroll or when the mobile menu is open */
+#navbar { transition: background .25s ease, box-shadow .25s ease; }
+#navbar.solid { background: var(--surface); box-shadow: 0 1px 0 var(--line); }
+.nav-link { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 500; font-size: .9rem; color: rgb(255 255 255 / .9);
+  padding: .35rem .1rem; border-bottom: 2px solid transparent; transition: color .2s, border-color .2s; }
+.nav-link:hover, .nav-link.active { color: #fff; border-color: #fff; }
+#navbar.solid .nav-link { color: var(--muted); }
+#navbar.solid .nav-link:hover, #navbar.solid .nav-link.active { color: var(--deep); border-color: var(--forest); }
+.burger { color: #fff; } #navbar.solid .burger { color: var(--deep); }
+
+.hero-shade { background: linear-gradient(to top, rgb(10 40 28 / .88) 0%, rgb(10 40 28 / .5) 55%, rgb(10 40 28 / .65) 100%); }
 
 .img-cover { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
-.card:hover .img-cover, .gal-item:hover .img-cover { transform: scale(1.04); }
+.group:hover .img-cover, .gal-item:hover .img-cover { transform: scale(1.04); }
 
-.reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+.reveal { opacity: 0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease; }
 .reveal.in { opacity: 1; transform: none; }
-dialog#lightbox { border: 0; border-radius: .75rem; padding: 0; max-width: min(92vw, 60rem); background: var(--surface); }
-dialog#lightbox::backdrop { background: rgb(10 30 20 / .75); }
+
+dialog#lightbox { border: 0; border-radius: .5rem; padding: 0; max-width: min(94vw, 60rem); background: var(--surface); }
+dialog#lightbox::backdrop { background: rgb(10 30 20 / .8); }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
-  .card, .img-cover, .btn { transition: none; }
+  .img-cover, .btn, #navbar { transition: none; }
 }
+
+/* Section styles */
+.bg-photo {
+  background: linear-gradient(rgb(10 40 28 / .84), rgb(10 40 28 / .9)), url('/images/desa.jpg') center / cover;
+}
+@media (min-width: 768px) { .bg-photo { background-attachment: fixed; } }
+
+.dots { background-image: radial-gradient(rgb(24 80 61 / .16) 1.3px, transparent 1.3px); background-size: 20px 20px; }
+
+/* Each section slides over the previous one with a big curved top edge */
+.curve {
+  position: relative; margin-top: -2.5rem; border-radius: 2rem 2rem 0 0;
+  padding-top: calc(clamp(3rem, 8vw, 5.5rem) + 1.5rem);
+}
+@media (min-width: 768px) { .curve { margin-top: -3.5rem; border-radius: 3.5rem 3.5rem 0 0; } }
+
+.glass { background: rgb(255 255 255 / .1); backdrop-filter: blur(10px); border: 1px solid rgb(255 255 255 / .25);
+  transition: background .2s ease, transform .2s ease; }
+.glass:hover { background: rgb(255 255 255 / .18); transform: translateY(-2px); }
+@media (prefers-reduced-motion: reduce) { .glass { transition: none; } }

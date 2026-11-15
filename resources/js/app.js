@@ -1,15 +1,18 @@
 const $ = (s, c = document) => c.querySelector(s);
 const $$ = (s, c = document) => [...c.querySelectorAll(s)];
 
-// Navbar: shadow on scroll + mobile toggle
+// Navbar: solid after scroll or while the mobile menu is open
 const nav = $('#navbar'), menu = $('#mobile-menu'), toggle = $('#nav-toggle');
-const onScroll = () => nav.classList.toggle('scrolled', scrollY > 8);
-onScroll(); addEventListener('scroll', onScroll, { passive: true });
-toggle.addEventListener('click', () => {
-  const open = menu.classList.toggle('hidden') === false;
+const sync = () => nav.classList.toggle('solid', scrollY > 40 || !menu.classList.contains('hidden'));
+sync(); addEventListener('scroll', sync, { passive: true });
+const setMenu = open => {
+  menu.classList.toggle('hidden', !open);
   toggle.setAttribute('aria-expanded', open);
-});
-$$('a', menu).forEach(a => a.addEventListener('click', () => { menu.classList.add('hidden'); toggle.setAttribute('aria-expanded', false); }));
+  sync();
+};
+toggle.addEventListener('click', () => setMenu(menu.classList.contains('hidden')));
+$$('a', menu).forEach(a => a.addEventListener('click', () => setMenu(false)));
+addEventListener('resize', () => { if (innerWidth >= 1024) setMenu(false); });
 
 // Active nav link
 const links = $$('[data-nav]');
@@ -32,3 +35,13 @@ $$('.gal-item').forEach(i => i.addEventListener('click', () => {
   boxImg.src = i.dataset.full; boxImg.alt = i.dataset.alt; box.showModal();
 }));
 box.addEventListener('click', e => { if (e.target === box || e.target.closest('[data-close]')) box.close(); });
+
+
+// If a placeholder image fails to load, fall back to the local village photo
+const fallback = img => {
+  if (img.dataset.fb) return;
+  img.dataset.fb = '1';
+  img.src = '/images/desa.jpg';
+};
+document.addEventListener('error', e => { if (e.target.tagName === 'IMG') fallback(e.target); }, true);
+$$('img').forEach(i => { if (i.complete && i.naturalWidth === 0) fallback(i); });
