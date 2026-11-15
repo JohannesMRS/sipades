@@ -38,10 +38,10 @@ return [
     ],
 
     'transparency' => [
-        ['icon' => 'chart', 'title' => 'APBDes', 'text' => 'Anggaran pendapatan dan belanja desa.'],
-        ['icon' => 'coins', 'title' => 'Realisasi Anggaran', 'text' => 'Penggunaan anggaran desa.'],
-        ['icon' => 'build', 'title' => 'Informasi Pembangunan', 'text' => 'Program dan progres pembangunan.'],
-        ['icon' => 'doc',   'title' => 'Dokumen Publik', 'text' => 'Peraturan dan dokumen terbuka.'],
+        ['icon' => 'chart', 'title' => 'APBDes', 'text' => 'Anggaran pendapatan dan belanja desa.', 'url' => '/apbdes'],
+        ['icon' => 'coins', 'title' => 'Realisasi Anggaran', 'text' => 'Penggunaan anggaran desa.', 'url' => '/realisasi-anggaran'],
+        ['icon' => 'build', 'title' => 'Informasi Pembangunan', 'text' => 'Program dan progres pembangunan.', 'url' => '/informasi-pembangunan'],
+        ['icon' => 'doc',   'title' => 'Dokumen Publik', 'text' => 'Peraturan dan dokumen terbuka.', 'url' => '/dokumen-publik'],
     ],
 
     'gallery' => [

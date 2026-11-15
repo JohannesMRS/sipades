@@ -3,7 +3,7 @@ const $$ = (s, c = document) => [...c.querySelectorAll(s)];
 
 // Navbar: solid after scroll or while the mobile menu is open
 const nav = $('#navbar'), menu = $('#mobile-menu'), toggle = $('#nav-toggle');
-const sync = () => nav.classList.toggle('solid', scrollY > 40 || !menu.classList.contains('hidden'));
+const sync = () => nav.classList.toggle('solid', scrollY > 40 || !menu.classList.contains('hidden') || nav.dataset.solid !== undefined);
 sync(); addEventListener('scroll', sync, { passive: true });
 const setMenu = open => {
   menu.classList.toggle('hidden', !open);

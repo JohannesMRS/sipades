@@ -77,3 +77,40 @@ dialog#lightbox::backdrop { background: rgb(10 30 20 / .8); }
   transition: background .2s ease, transform .2s ease; }
 .glass:hover { background: rgb(255 255 255 / .18); transform: translateY(-2px); }
 @media (prefers-reduced-motion: reduce) { .glass { transition: none; } }
+
+/* ---- Halaman layanan ---- */
+.brand { transition: color .25s; }
+#navbar.solid .brand { color: var(--forest); }
+
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: .75rem; }
+.field { min-height: 2.75rem; width: 100%; border: 1px solid var(--line); border-radius: .5rem; background: #fff; padding: .5rem .75rem; }
+.badge { display: inline-block; font-size: .75rem; font-weight: 600; padding: .15rem .6rem; border-radius: 999px; background: var(--light); color: var(--forest); }
+.badge-warn { background: var(--warn-bg); color: var(--warn-text); }
+.badge-gray { background: #eceeed; color: var(--muted); }
+
+#tip { position: fixed; z-index: 60; pointer-events: none; background: var(--deep); color: #fff; font-size: .8rem; padding: .35rem .6rem; border-radius: .4rem; max-width: 18rem; }
+dialog#proyek { border: 0; border-radius: .75rem; padding: 0; width: min(94vw, 52rem); max-height: 90vh; background: var(--surface); }
+dialog#proyek::backdrop { background: rgb(10 30 20 / .75); }
+
+.rt { width: 100%; font-size: .875rem; }
+.rt th { text-align: left; font-weight: 600; color: var(--muted); padding: .6rem .75rem; border-bottom: 2px solid var(--line); white-space: nowrap; }
+.rt td { padding: .7rem .75rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+@media (max-width: 767px) {
+  .rt thead { display: none; }
+  .rt tr { display: block; border: 1px solid var(--line); border-radius: .6rem; margin-bottom: .75rem; padding: .4rem .75rem; }
+  .rt td { display: flex; justify-content: space-between; gap: 1rem; border: 0; padding: .35rem 0; text-align: right; }
+  .rt td::before { content: attr(data-label); color: var(--muted); text-align: left; flex-shrink: 0; }
+}
+@media print {
+  body * { visibility: hidden; }
+  #print, #print * { visibility: visible; }
+  #print { position: absolute; left: 0; top: 0; width: 100%; }
+}
+
+/* Center dialogs again (Tailwind v4 preflight resets dialog margin to 0) */
+dialog#proyek, dialog#lightbox { margin: auto; }
+dialog#proyek { max-height: 90svh; overflow-y: auto; overscroll-behavior: contain; }
+dialog#lightbox { max-height: 92svh; }
+@media (max-width: 639px) {
+  dialog#proyek { width: calc(100vw - 1.5rem); border-radius: .75rem; }
+}

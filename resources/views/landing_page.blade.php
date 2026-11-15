@@ -160,7 +160,7 @@
     <x-section-heading class="reveal" :light="true" title="Layanan & Transparansi Publik" text="Informasi terbuka bagi seluruh warga. Dokumen akan tersedia setelah diunggah oleh pemerintah desa." />
     <div class="grid sm:grid-cols-2 gap-4">
       @foreach($v['transparency'] as $t)
-        <a href="#" class="glass rounded-md p-5 sm:p-6 flex items-start gap-4">
+        <a href="{{ url($t['url']) }}" class="glass rounded-md p-5 sm:p-6 flex items-start gap-4">
           <span class="grid place-items-center size-12 shrink-0 rounded-md bg-white/15 text-[var(--light)]"><x-icon :name="$t['icon']" class="size-7"/></span>
           <span>
             <span class="block font-display font-bold text-lg">{{ $t['title'] }}</span>
