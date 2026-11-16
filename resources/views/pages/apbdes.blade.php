@@ -5,8 +5,7 @@
 
 <section class="section curve bg-[var(--bg)]">
   <div class="container-x">
-    <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
-      <p class="badge badge-warn">Data contoh, bukan data resmi desa</p>
+    <div class="flex justify-end mb-4">
       <label class="flex items-center gap-2 text-sm font-semibold">Tahun anggaran
         <select id="year" class="field !w-auto">@foreach(array_keys(config('sipades.years')) as $y)<option>{{ $y }}</option>@endforeach</select>
       </label>
@@ -24,16 +23,11 @@
     </div>
 
     <div class="panel p-5 sm:p-6 mt-6">
-      <h2 class="font-bold text-lg text-deep">Persentase Realisasi Anggaran</h2>
-      <div class="mt-4 flex items-end justify-between gap-4">
-        <p id="pct" class="font-display text-4xl font-extrabold text-forest"></p>
-        <p class="text-sm text-muted">terealisasi dari total anggaran</p>
-      </div>
-      <div class="mt-3 h-4 rounded-full bg-black/10 overflow-hidden"><div id="pbar" class="h-4 bg-forest" style="width:0"></div></div>
-      <dl class="mt-5 grid sm:grid-cols-3 gap-4 text-sm">
-        <div><dt class="text-muted">Dianggarkan</dt><dd id="d-b" class="font-semibold"></dd></div>
-        <div><dt class="text-muted">Terealisasi</dt><dd id="d-r" class="font-semibold"></dd></div>
-        <div><dt class="text-muted">Sisa anggaran</dt><dd id="d-s" class="font-semibold"></dd></div>
+      <h2 class="font-bold text-lg text-deep">Realisasi Anggaran</h2>
+      <dl class="mt-5 grid sm:grid-cols-3 gap-5">
+        <div><dt class="text-sm text-muted">Dianggarkan</dt><dd id="d-b" class="font-display text-xl sm:text-2xl font-extrabold text-deep break-words"></dd></div>
+        <div><dt class="text-sm text-muted">Terealisasi</dt><dd id="d-r" class="font-display text-xl sm:text-2xl font-extrabold text-forest break-words"></dd></div>
+        <div><dt class="text-sm text-muted">Sisa anggaran</dt><dd id="d-s" class="font-display text-xl sm:text-2xl font-extrabold text-[var(--warn-text)] break-words"></dd></div>
       </dl>
     </div>
 
@@ -55,12 +49,11 @@
 @push('scripts')
 <script>
 const D = @json(config('sipades.years')), BID = @json(config('sipades.bidang'));
-const hdr = `<div class="hidden sm:grid grid-cols-[1fr_9rem_9rem_11rem] gap-x-4 text-xs font-semibold text-muted pb-2"><span>Uraian</span><span>Anggaran</span><span>Realisasi</span><span>Realisasi (%)</span></div>`;
-const row = (n, b, r, strong) => `<div class="grid sm:grid-cols-[1fr_9rem_9rem_11rem] gap-x-4 gap-y-1 py-3 border-t border-[var(--line)] items-center ${strong ? 'font-bold' : ''}">
+const hdr = `<div class="hidden sm:grid grid-cols-[1fr_11rem_11rem] gap-x-4 text-xs font-semibold text-muted pb-2"><span>Uraian</span><span>Anggaran</span><span>Realisasi</span></div>`;
+const row = (n, b, r, strong) => `<div class="grid sm:grid-cols-[1fr_11rem_11rem] gap-x-4 gap-y-1 py-3 border-t border-[var(--line)] items-center ${strong ? 'font-bold' : ''}">
   <p class="${strong ? '' : 'font-medium'}">${n}</p>
   <p class="text-sm"><span class="sm:hidden text-muted font-normal">Anggaran: </span>${rp(b)}</p>
-  <p class="text-sm"><span class="sm:hidden text-muted font-normal">Realisasi: </span>${rp(r)}</p>
-  <div class="flex items-center gap-2"><div class="h-2 flex-1 rounded bg-black/10"><div class="h-2 rounded bg-forest" style="width:${pc(r, b)}%"></div></div><span class="w-12 text-right text-sm font-semibold">${pc(r, b)}%</span></div></div>`;
+  <p class="text-sm"><span class="sm:hidden text-muted font-normal">Realisasi: </span>${rp(r)}</p></div>`;
 const set = (id, v) => q('#' + id).textContent = v;
 
 function draw(y) {
@@ -72,11 +65,10 @@ function draw(y) {
   const fb = pb - kb, fr = pr - kr;
   const ab = eb + kb, ar = er + kr;
 
-  set('s-inc', rp(ib)); set('n-inc', `Realisasi ${pc(ir, ib)}%`);
-  set('s-exp', rp(eb)); set('n-exp', `Realisasi ${pc(er, eb)}%`);
+  set('s-inc', rp(ib)); set('n-inc', `Realisasi ${rp(ir)}`);
+  set('s-exp', rp(eb)); set('n-exp', `Realisasi ${rp(er)}`);
   set('s-fin', rp(fb)); set('n-fin', `Penerimaan ${cm(pb)} − pengeluaran ${cm(kb)}`);
   set('s-all', rp(ab)); set('n-all', 'Belanja + pengeluaran pembiayaan');
-  set('pct', pc(ar, ab) + '%'); q('#pbar').style.width = pc(ar, ab) + '%';
   set('d-b', rp(ab)); set('d-r', rp(ar)); set('d-s', rp(ab - ar));
   q('#chart').innerHTML = bars([{ l: 'Pendapatan', b: ib, r: ir }, { l: 'Belanja', b: eb, r: er }, { l: 'Pembiayaan (netto)', b: fb, r: fr }]);
 

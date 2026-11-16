@@ -119,7 +119,7 @@
   <div class="container-x">
     <div class="flex flex-wrap items-end justify-between gap-x-6">
       <x-section-heading class="reveal" title="Informasi & Berita" text="Kabar terbaru, pengumuman penting, dan informasi publik." />
-      <a href="#" class="btn btn-ghost mb-8 md:mb-10 hidden sm:inline-flex">Lihat Semua Berita</a>
+      <a href="{{ route('berita') }}" class="btn btn-ghost mb-8 md:mb-10 hidden sm:inline-flex">Lihat Semua Berita</a>
     </div>
     <div class="grid lg:grid-cols-5 gap-8 lg:gap-10">
       <div class="lg:col-span-3"><x-news-card :item="$v['news'][0]" :featured="true" /></div>
@@ -127,7 +127,7 @@
         @foreach(array_slice($v['news'], 1) as $n)<x-news-card :item="$n" />@endforeach
       </div>
     </div>
-    <a href="#" class="btn btn-ghost mt-8 w-full sm:hidden">Lihat Semua Berita</a>
+    <a href="{{ route('berita') }}" class="btn btn-ghost mt-8 w-full sm:hidden">Lihat Semua Berita</a>
   </div>
 </section>
 
@@ -206,9 +206,10 @@
         </ul>
         <a href="#" class="btn btn-light mt-8 w-full sm:w-auto">Hubungi Pemerintah Desa</a>
       </div>
-      <div class="min-h-72 bg-forest">
+      <div class="relative min-h-72 lg:min-h-0 bg-forest">
         @if($v['contact']['map_embed'])
-          <iframe src="{{ $v['contact']['map_embed'] }}" title="Lokasi kantor desa" class="w-full h-full min-h-72" loading="lazy"></iframe>
+          <iframe src="{{ $v['contact']['map_embed'] }}" title="Peta lokasi kantor desa" class="absolute inset-0 size-full border-0" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+          <a href="{{ $v['contact']['map_link'] }}" target="_blank" rel="noopener" class="btn btn-light !min-h-10 text-sm absolute bottom-3 left-3 shadow">Buka di Google Maps</a>
         @else
           <div class="h-full min-h-72 grid place-items-center text-center p-6 text-white/80">
             <div><x-icon name="map" class="size-8 mx-auto text-[var(--light)]"/><p class="mt-2 text-sm">Peta Google Maps akan ditampilkan di sini.</p></div>

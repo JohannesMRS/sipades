@@ -1,9 +1,12 @@
 @props(['item', 'featured' => false])
-@php $warn = $item['category'] === 'Pengumuman'; @endphp
+@php
+  $warn = $item['category'] === 'Pengumuman';
+  $href = ($item['url'] ?? '#') !== '#' ? $item['url'] : route('berita.show', Str::slug($item['title']));
+@endphp
 
 @if($featured)
   <article>
-    <a href="{{ $item['url'] }}" class="group block">
+    <a href="{{ $href }}" class="group block">
       <div class="aspect-[16/10] overflow-hidden rounded-md">
         <img class="img-cover" loading="lazy" src="{{ $item['image'] }}" alt="">
       </div>
@@ -16,7 +19,7 @@
   </article>
 @else
   <article class="py-4 first:pt-0 border-b border-[var(--line)] last:border-0">
-    <a href="{{ $item['url'] }}" class="group flex gap-4 items-start">
+    <a href="{{ $href }}" class="group flex gap-4 items-start">
       <div class="w-24 sm:w-32 shrink-0 aspect-[4/3] overflow-hidden rounded-md">
         <img class="img-cover" loading="lazy" src="{{ $item['image'] }}" alt="">
       </div>

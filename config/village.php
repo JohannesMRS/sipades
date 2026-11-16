@@ -1,6 +1,7 @@
 <?php
 // Centralized PLACEHOLDER content. Replace values later; the views read only from here.
 $img = fn ($seed, $w = 800, $h = 600) => "https://picsum.photos/seed/{$seed}/{$w}/{$h}";
+$alamat = 'Jl. Bahagia No.47, Titi Rantai, Kec. Medan Baru, Kota Medan, Sumatera Utara 20157';
 
 return [
     'name' => 'Berkah Bahagia',
@@ -53,9 +54,12 @@ return [
         ['cat' => 'Acara',      'src' => $img('galeri-6'), 'alt' => 'Acara budaya'],
     ],
 
-    'contact' => [ // placeholders only, no real details
-        'address' => '[Alamat kantor desa]', 'phone' => '[Nomor telepon]',
-        'email' => '[Email resmi desa]', 'hours' => 'Senin – Jumat, [jam operasional]',
-        'map_embed' => null, // paste a Google Maps embed URL here
+    'contact' => [
+        'address' => $alamat,
+        'phone' => '[Nomor telepon]',
+        'email' => '[Email resmi desa]',
+        'hours' => 'Senin – Jumat, [jam operasional]',
+        'map_embed' => 'https://www.google.com/maps?q=' . urlencode($alamat) . '&output=embed',
+        'map_link' => 'https://www.google.com/maps/search/?api=1&query=' . urlencode($alamat),
     ],
 ];
