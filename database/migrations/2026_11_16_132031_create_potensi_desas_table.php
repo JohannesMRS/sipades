@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('title');
             $table->enum('type', ['wisata desa', 'pertanian', 'umkm', 'budaya dan tradisi', 'produk lokal']);
             $table->text('description');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 
