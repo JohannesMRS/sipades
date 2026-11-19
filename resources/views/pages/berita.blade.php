@@ -2,8 +2,22 @@
 @section('title', 'Informasi & Berita')
 @section('content')
 @php
-  $items = collect(config('village.news'))->map(fn ($n) => $n + ['href' => route('berita.show', Str::slug($n['title']))]);
-  $cats = $items->pluck('category')->unique()->values();
+  $items = collect($items->items())->map(function ($berita) {
+      $category = $berita->category?->name ?? 'Berita';
+      return [
+          'category' => $category,
+          'date' => $berita->published_at?->translatedFormat('j F Y') ?? '—',
+          'title' => $berita->title,
+          'excerpt' => $berita->excerpt,
+          'image' => $berita->image
+              ? (str_starts_with($berita->image, 'http://') || str_starts_with($berita->image, 'https://')
+                  ? $berita->image
+                  : '/storage/'.ltrim($berita->image, '/'))
+              : '',
+          'href' => route('berita.show', $berita->slug),
+      ];
+  });
+  $cats = \App\Models\BeritaCategory::query()->orderBy('name')->get();
 @endphp
 <x-page-hero title="Informasi & Berita" text="Kabar terbaru, pengumuman penting, dan informasi publik dari desa." :tabs="false" crumb="Informasi" :crumb-url="url('/') . '#informasi'" />
 
@@ -12,12 +26,12 @@
     <input id="bq" type="search" class="field sm:max-w-md" placeholder="Cari berita" aria-label="Cari berita">
     <div class="mt-4 flex gap-2 overflow-x-auto pb-1" id="bc" role="group" aria-label="Filter kategori">
       <button data-c="" aria-pressed="true" class="btn btn-ghost shrink-0 aria-pressed:!bg-[var(--forest)] aria-pressed:!text-white">Semua</button>
-      @foreach($cats as $c)<button data-c="{{ $c }}" aria-pressed="false" class="btn btn-ghost shrink-0 aria-pressed:!bg-[var(--forest)] aria-pressed:!text-white">{{ $c }}</button>@endforeach
+      @foreach($cats as $c)<button data-c="{{ $c->slug }}" aria-pressed="{{ $category === $c->slug ? 'true' : 'false' }}" class="btn btn-ghost shrink-0 aria-pressed:!bg-[var(--forest)] aria-pressed:!text-white">{{ $c->name }}</button>@endforeach
     </div>
 
     <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
       @foreach($items as $n)
-        <article class="news-item panel overflow-hidden" data-cat="{{ $n['category'] }}" data-t="{{ Str::lower($n['title'] . ' ' . $n['excerpt']) }}">
+        <article class="news-item panel overflow-hidden" data-cat="{{ $n['category'] }}" data-t="{{ Str::lower($n['title'].' '.$n['excerpt']) }}">
           <a href="{{ $n['href'] }}" class="group flex flex-col h-full">
             <div class="aspect-[16/10] overflow-hidden bg-soft"><img class="img-cover" loading="lazy" src="{{ $n['image'] }}" alt=""></div>
             <div class="p-5 flex flex-col gap-1.5 flex-1">

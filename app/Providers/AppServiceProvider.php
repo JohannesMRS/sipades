@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Berita;
 use App\Models\PerangkatDesa;
 use App\Models\VillageSetting;
 use Illuminate\Support\Facades\View;
@@ -35,6 +36,20 @@ class AppServiceProvider extends ServiceProvider
                     : '',
             ])->all();
 
+            $news = Berita::query()->published()->with('category')->orderByDesc('is_featured')->latest('published_at')->take(4)->get()->map(fn (Berita $berita): array => [
+                'category' => $berita->category?->name ?? 'Berita',
+                'date' => $berita->published_at?->translatedFormat('j F Y') ?? '—',
+                'title' => $berita->title,
+                'excerpt' => $berita->excerpt,
+                'image' => $berita->image
+                    ? (str_starts_with($berita->image, 'http://') || str_starts_with($berita->image, 'https://')
+                        ? $berita->image
+                        : '/storage/'.ltrim($berita->image, '/'))
+                    : '',
+                'url' => route('berita.show', $berita->slug),
+                'content' => $berita->content ? [$berita->content] : null,
+            ])->all();
+
             $address = $setting?->address ?: ($fallback['contact']['address'] ?? '—');
             $mapEmbed = $setting?->map_embed ?: 'https://www.google.com/maps?q='.urlencode((string) $address).'&output=embed';
             $mapLink = 'https://www.google.com/maps/search/?api=1&query='.urlencode((string) $address);
@@ -58,6 +73,10 @@ class AppServiceProvider extends ServiceProvider
                 'map_embed' => $mapEmbed,
                 'map_link' => $mapLink,
             ];
+
+            if ($news !== []) {
+                $village['news'] = $news;
+            }
 
             $view->with('v', $village);
         });

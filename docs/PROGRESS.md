@@ -8,7 +8,13 @@
   - Filament menyediakan satu halaman Pengaturan Desa dan resource Perangkat Desa dengan upload foto serta reorder urutan.
   - Seeder memindahkan nama, tagline, kontak, dan daftar pejabat awal dari `config/village.php`; nilai statistik dummy disimpan sebagai 0.
   - Pengujian gabungan Fase 1 dan Fase 2 lulus: 9 test, 18 assertion.
-- Fase 3 (berita): belum
+- Fase 3 (berita): selesai — 19 November 2026
+  - menambahkan kategori berita dan kolom berita: slug, ringkasan, isi, gambar, status, tanggal terbit, serta disematkan.
+  - Filament menyediakan dashboard untuk kategori dan berita, dengan rich text dan upload gambar publik.
+  - Publik hanya menampilkan berita berstatus terbit dengan tanggal terbit tidak mendatang.
+  - `/berita` memakai pencarian, filter kategori, dan pagination database; `/berita/{slug}` memakai slug database.
+  - Beranda menampilkan berita utama yang disematkan atau terbaru, diikuti berita berikutnya.
+  - Isi rich text disanitasi sebelum ditampilkan dan regression Fase 1–3 lulus: 12 test, 26 assertion.
 - Fase 4 (potensi desa, galeri): belum
 - Fase 5 (APBDes, realisasi, lampiran laporan PDF): belum
 - Fase 6 (informasi pembangunan, dokumen publik): belum
