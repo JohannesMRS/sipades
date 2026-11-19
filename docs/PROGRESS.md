@@ -15,7 +15,12 @@
   - `/berita` memakai pencarian, filter kategori, dan pagination database; `/berita/{slug}` memakai slug database.
   - Beranda menampilkan berita utama yang disematkan atau terbaru, diikuti berita berikutnya.
   - Isi rich text disanitasi sebelum ditampilkan dan regression Fase 1–3 lulus: 12 test, 26 assertion.
-- Fase 4 (potensi desa, galeri): belum
+- Fase 4 (potensi desa, galeri): selesai — 19 November 2026
+  - menambahkan gambar, kategori, urutan, dan status aktif pada potensi desa serta galeri.
+  - Dashboard Filament menyediakan potensi dan galeri dengan upload publik, validasi gambar, serta reorder drag-and-drop.
+  - Beranda mengambil potensi dan galeri aktif berurutan dari database; filter kategori dan lightbox tetap memakai struktur view lama.
+  - Seeder memindahkan lima potensi dan enam item galeri dari `config/village.php` tanpa data baru.
+  - Regression gabungan Fase 1–4 lulus: 16 test, 30 assertion.
 - Fase 5 (APBDes, realisasi, lampiran laporan PDF): belum
 - Fase 6 (informasi pembangunan, dokumen publik): belum
 - Fase 7 (pembersihan, keamanan, test): belum

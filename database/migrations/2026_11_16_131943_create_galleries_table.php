@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('galleries', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['kegiatan', 'lingkungan', 'acara']);
+            $table->enum('type', ['kegiatan', 'lingkungan', 'acara'])->default('kegiatan');
             $table->string('image');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();

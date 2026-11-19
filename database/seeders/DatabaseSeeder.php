@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminSeeder::class);
         $this->call(VillageSettingSeeder::class);
         $this->call(BeritaSeeder::class);
+        $this->call(PotensiGallerySeeder::class);
     }
 }

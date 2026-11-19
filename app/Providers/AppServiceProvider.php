@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Berita;
+use App\Models\Gallery;
 use App\Models\PerangkatDesa;
+use App\Models\PotensiDesa;
 use App\Models\VillageSetting;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -50,6 +52,27 @@ class AppServiceProvider extends ServiceProvider
                 'content' => $berita->content ? [$berita->content] : null,
             ])->all();
 
+            $potentials = PotensiDesa::query()->activeOrdered()->get(['title', 'category', 'description', 'image'])->map(fn (PotensiDesa $item): array => [
+                'category' => $item->category ?: '—',
+                'title' => $item->title ?: '—',
+                'text' => $item->description ?: '—',
+                'image' => $item->image
+                    ? (str_starts_with($item->image, 'http://') || str_starts_with($item->image, 'https://')
+                        ? $item->image
+                        : '/storage/'.ltrim($item->image, '/'))
+                    : '',
+            ])->all();
+
+            $gallery = Gallery::query()->activeOrdered()->get(['category', 'image', 'alt'])->map(fn (Gallery $item): array => [
+                'cat' => $item->category ?: '—',
+                'src' => $item->image
+                    ? (str_starts_with($item->image, 'http://') || str_starts_with($item->image, 'https://')
+                        ? $item->image
+                        : '/storage/'.ltrim($item->image, '/'))
+                    : '',
+                'alt' => $item->alt ?: '—',
+            ])->all();
+
             $address = $setting?->address ?: ($fallback['contact']['address'] ?? '—');
             $mapEmbed = $setting?->map_embed ?: 'https://www.google.com/maps?q='.urlencode((string) $address).'&output=embed';
             $mapLink = 'https://www.google.com/maps/search/?api=1&query='.urlencode((string) $address);
@@ -76,6 +99,12 @@ class AppServiceProvider extends ServiceProvider
 
             if ($news !== []) {
                 $village['news'] = $news;
+            }
+            if ($potentials !== []) {
+                $village['potentials'] = $potentials;
+            }
+            if ($gallery !== []) {
+                $village['gallery'] = $gallery;
             }
 
             $view->with('v', $village);
