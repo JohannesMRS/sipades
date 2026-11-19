@@ -30,7 +30,7 @@
 
 @push('scripts')
 <script>
-const P = @json(config('sipades.projects'));
+const P = @json($projects);
 const dt = s => new Date(s).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
 const badge = s => s === 'Selesai' ? 'badge' : s === 'Sedang Berjalan' ? 'badge badge-warn' : 'badge badge-gray';
 const set = (id, v) => q('#' + id).textContent = v;

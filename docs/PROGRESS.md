@@ -28,7 +28,11 @@
   - `BudgetDataService` membentuk struktur lama `sipades.years` dan `sipades.bidang` untuk JavaScript halaman APBDes/Realisasi.
   - Halaman Realisasi menyediakan unduh laporan resmi PDF per tahun jika tersedia; tombol CSV dan cetak lama tetap dipertahankan.
   - Regression gabungan Fase 1–5 lulus: 20 test, 38 assertion.
-- Fase 6 (informasi pembangunan, dokumen publik): belum
+- Fase 6 (informasi pembangunan, dokumen publik): selesai — 20 November 2026
+  - menambahkan proyek, dokumentasi proyek, dan dokumen publik beserta upload file.
+  - Dashboard Filament mengelola pembangunan, tahap dokumentasi, dan dokumen terbit/draft.
+  - Halaman pembangunan memakai `ProjectPublicService` dengan struktur data lama; dokumen mendukung pencarian, kategori, tahun, dan unduhan.
+  - Regression gabungan Fase 1–6 lulus: 24 test, 48 assertion.
 - Fase 7 (pembersihan, keamanan, test): belum
 
 ## Catatan penting dari fase sebelumnya
