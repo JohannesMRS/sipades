@@ -33,7 +33,14 @@
   - Dashboard Filament mengelola pembangunan, tahap dokumentasi, dan dokumen terbit/draft.
   - Halaman pembangunan memakai `ProjectPublicService` dengan struktur data lama; dokumen mendukung pencarian, kategori, tahun, dan unduhan.
   - Regression gabungan Fase 1–6 lulus: 24 test, 48 assertion.
-- Fase 7 (pembersihan, keamanan, test): belum
+- Fase 7 (pembersihan, keamanan, test): selesai — 20 November 2026
+  - memastikan view dan route tidak lagi membaca konten dari `config/village.php` atau `config/sipades.php`; layout layanan memakai data `village_settings`.
+  - Badge dan teks placeholder data contoh telah dihapus dari halaman Realisasi dan Pembangunan serta profil beranda.
+  - Tambahan indeks filter/urutan diterapkan untuk berita, dokumen publik, dan pembangunan.
+  - Validasi model menolak realisasi yang melebihi anggaran; Filament tetap membatasi login akun aktif dan aksi operator melalui policy.
+  - `.env.example` mengatur contoh produksi `APP_DEBUG=false`; `.env` lokal tetap dapat memakai mode debug untuk pengembangan.
+  - Suite PHPUnit lengkap lulus: 31 test, 60 assertion.
+  - Checklist belum beres: penghapusan file config dummy masih menunggu persetujuan; backup rutin PostgreSQL dan `storage/app/public` perlu dijadwalkan di lingkungan produksi.
 
 ## Catatan penting dari fase sebelumnya
 - Lingkungan aktual: PHP 8.5.4, Laravel 13.40.0, Tailwind CSS 4.3.5, Vite 8.3.8.

@@ -1,5 +1,9 @@
 @php
-  $v = config('village');
+  $setting = \App\Models\VillageSetting::query()->find(1);
+  $v = [
+    'name' => $setting?->name ?: 'Desa',
+    'logo' => $setting?->logo ?: 'images/logo.png',
+  ];
   $menu = ['beranda' => 'Beranda', 'profil' => 'Profil Desa', 'pemerintahan' => 'Pemerintahan', 'informasi' => 'Informasi', 'potensi' => 'Potensi Desa', 'layanan' => 'Layanan Desa', 'kontak' => 'Kontak'];
 @endphp
 <!DOCTYPE html>

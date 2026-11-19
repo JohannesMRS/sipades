@@ -5,7 +5,6 @@
 
 <section class="section curve bg-[var(--bg)]">
   <div class="container-x">
-    <p class="badge badge-warn">Data contoh, bukan data resmi desa</p>
 
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mt-4">
       @foreach([['area','Total Anggaran','a'],['coins','Total Realisasi','r'],['clock','Sisa Anggaran','s'],['chart','Persentase Realisasi','p']] as [$ic,$lb,$id])
@@ -111,7 +110,7 @@ q('#dl-xls').addEventListener('click', () => {
 });
 q('#dl-pdf').addEventListener('click', () => {
   const F = filtered();
-  q('#print').innerHTML = `<h1 style="font-size:18px;font-weight:700">Laporan Realisasi Anggaran Desa ${yr()}</h1><p style="margin-bottom:12px">Data contoh. Dicetak ${new Date().toLocaleDateString('id-ID')}</p>
+  q('#print').innerHTML = `<h1 style="font-size:18px;font-weight:700">Laporan Realisasi Anggaran Desa ${yr()}</h1>
   <table style="width:100%;border-collapse:collapse;font-size:11px"><thead><tr>${['No', 'Kegiatan', 'Bidang', 'Anggaran', 'Realisasi', 'Sisa', '%', 'Status'].map(h => `<th style="border:1px solid #999;padding:4px;text-align:left">${h}</th>`).join('')}</tr></thead><tbody>
   ${F.map((x, i) => `<tr>${[i + 1, x[0], BID[x[1]], rp(x[2]), rp(x[3]), rp(x[2] - x[3]), pc(x[3], x[2]) + '%', x[4]].map(c => `<td style="border:1px solid #999;padding:4px">${c}</td>`).join('')}</tr>`).join('')}
   </tbody></table>`;

@@ -23,4 +23,13 @@ class BudgetActivity extends Model
     {
         return $this->belongsTo(BudgetField::class, 'budget_field_id');
     }
+
+    protected static function booted(): void
+    {
+        static::saving(function (BudgetActivity $activity): void {
+            if ($activity->realized_amount > $activity->budget_amount) {
+                throw new \InvalidArgumentException('Realisasi kegiatan tidak boleh melebihi anggaran.');
+            }
+        });
+    }
 }

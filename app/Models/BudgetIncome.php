@@ -18,4 +18,13 @@ class BudgetIncome extends Model
     {
         return $this->belongsTo(BudgetYear::class, 'budget_year_id');
     }
+
+    protected static function booted(): void
+    {
+        static::saving(function (BudgetIncome $income): void {
+            if ($income->realized_amount > $income->budget_amount) {
+                throw new \InvalidArgumentException('Realisasi pendapatan tidak boleh melebihi anggaran.');
+            }
+        });
+    }
 }

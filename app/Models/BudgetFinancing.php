@@ -20,4 +20,13 @@ class BudgetFinancing extends Model
     {
         return $this->belongsTo(BudgetYear::class, 'budget_year_id');
     }
+
+    protected static function booted(): void
+    {
+        static::saving(function (BudgetFinancing $financing): void {
+            if ($financing->realized_amount > $financing->budget_amount) {
+                throw new \InvalidArgumentException('Realisasi pembiayaan tidak boleh melebihi anggaran.');
+            }
+        });
+    }
 }

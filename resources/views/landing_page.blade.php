@@ -1,5 +1,5 @@
 @php
-  $v = $v ?? config('village');
+  $v = $v ?? ['name' => 'Desa', 'logo' => 'images/logo.png', 'stats' => [], 'officials' => [], 'news' => [], 'potentials' => [], 'transparency' => [], 'gallery' => [], 'contact' => ['address' => '—', 'phone' => '—', 'email' => '—', 'hours' => '—', 'map_embed' => null, 'map_link' => '#'], 'images' => ['profile' => 'images/desa.jpg']];
   $menu = ['beranda' => 'Beranda', 'profil' => 'Profil Desa', 'pemerintahan' => 'Pemerintahan', 'informasi' => 'Informasi', 'potensi' => 'Potensi Desa', 'layanan' => 'Layanan Desa', 'kontak' => 'Kontak'];
   $cats = collect($v['gallery'])->pluck('cat')->unique();
 @endphp
@@ -87,8 +87,7 @@
     </div>
     <div class="order-1 md:order-2 reveal">
       <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold">Mengenal Lebih Dekat Desa Kami</h2>
-      <p class="mt-4 text-white/85">[Deskripsi singkat desa. Ganti dengan profil resmi yang disetujui pemerintah desa.]</p>
-      <p class="mt-3 text-white/85">[Informasi sejarah atau letak geografis akan ditampilkan di sini setelah data tersedia.]</p>
+      <p class="mt-4 text-white/85"></p>
       <a href="#" class="btn btn-light mt-6 w-full sm:w-auto">Selengkapnya Tentang Desa</a>
     </div>
   </div>

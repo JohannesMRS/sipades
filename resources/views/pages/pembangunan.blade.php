@@ -5,7 +5,6 @@
 
 <section class="section curve bg-[var(--bg)]">
   <div class="container-x">
-    <p class="badge badge-warn">Data contoh, bukan data resmi desa</p>
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mt-4">
       @foreach([['build','Total Proyek','t'],['doc','Proyek Selesai','d'],['clock','Sedang Berjalan','r'],['map','Akan Dilaksanakan','p']] as [$ic,$lb,$id])
         <div class="panel p-4 sm:p-5">
