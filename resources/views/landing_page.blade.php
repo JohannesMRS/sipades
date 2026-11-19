@@ -1,5 +1,5 @@
 @php
-  $v = config('village');
+  $v = $v ?? config('village');
   $menu = ['beranda' => 'Beranda', 'profil' => 'Profil Desa', 'pemerintahan' => 'Pemerintahan', 'informasi' => 'Informasi', 'potensi' => 'Potensi Desa', 'layanan' => 'Layanan Desa', 'kontak' => 'Kontak'];
   $cats = collect($v['gallery'])->pluck('cat')->unique();
 @endphp

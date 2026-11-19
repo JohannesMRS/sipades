@@ -2,7 +2,12 @@
 
 - Fase 0 (verifikasi konteks): selesai — 19 November 2026
 - Fase 1 (fondasi, login, peran): selesai — 19 November 2026
-- Fase 2 (pengaturan desa, statistik, kontak, perangkat desa): belum
+- Fase 2 (pengaturan desa, statistik, kontak, perangkat desa): selesai — 19 November 2026
+  - menambahkan tabel `village_settings` dan kolom `sort_order/is_active` pada `perangkat_desas`.
+  - Beranda memakai View Composer yang menggabungkan database dengan fallback config, tanpa mengubah markup publik.
+  - Filament menyediakan satu halaman Pengaturan Desa dan resource Perangkat Desa dengan upload foto serta reorder urutan.
+  - Seeder memindahkan nama, tagline, kontak, dan daftar pejabat awal dari `config/village.php`; nilai statistik dummy disimpan sebagai 0.
+  - Pengujian gabungan Fase 1 dan Fase 2 lulus: 9 test, 18 assertion.
 - Fase 3 (berita): belum
 - Fase 4 (potensi desa, galeri): belum
 - Fase 5 (APBDes, realisasi, lampiran laporan PDF): belum
