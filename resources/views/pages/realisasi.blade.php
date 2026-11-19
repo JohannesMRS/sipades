@@ -37,13 +37,16 @@
         <div class="flex gap-2">
           <button id="dl-xls" class="btn btn-ghost">Unduh Excel</button>
           <button id="dl-pdf" class="btn btn-primary">Unduh PDF</button>
+          @if(count($reportPdfs) > 0)
+          <a id="dl-official-pdf" href="" target="_blank" rel="noopener" class="btn btn-primary hidden">Unduh Laporan Resmi (PDF)</a>
+          @endif
         </div>
       </div>
       <div class="mt-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
         <input id="f-q" type="search" class="field" placeholder="Cari nama kegiatan" aria-label="Cari nama kegiatan">
-        <select id="f-b" class="field" aria-label="Filter bidang"><option value="">Semua bidang</option>@foreach(config('sipades.bidang') as $k => $n)<option value="{{ $k }}">{{ $n }}</option>@endforeach</select>
+        <select id="f-b" class="field" aria-label="Filter bidang"><option value="">Semua bidang</option>@foreach($budget['bidang'] as $k => $n)<option value="{{ $k }}">{{ $n }}</option>@endforeach</select>
         <select id="f-s" class="field" aria-label="Filter status"><option value="">Semua status</option><option>Belum Dimulai</option><option>Sedang Berjalan</option><option>Selesai</option></select>
-        <select id="f-y" class="field" aria-label="Tahun anggaran">@foreach(array_keys(config('sipades.years')) as $y)<option>{{ $y }}</option>@endforeach</select>
+        <select id="f-y" class="field" aria-label="Tahun anggaran">@foreach(array_keys($budget['years']) as $y)<option value="{{ $y }}">{{ $y }}</option>@endforeach</select>
       </div>
       <div class="mt-5">
         <table class="rt">
@@ -61,7 +64,8 @@
 
 @push('scripts')
 <script>
-const D = @json(config('sipades.years')), BID = @json(config('sipades.bidang'));
+const D = @json($budget['years']), BID = @json($budget['bidang']);
+const REPORT_PDFS = @json($reportPdfs);
 const PER = 6, st = { p: 1 };
 const badge = s => s === 'Selesai' ? 'badge' : s === 'Sedang Berjalan' ? 'badge badge-warn' : 'badge badge-gray';
 const set = (id, v) => q('#' + id).textContent = v;
@@ -93,7 +97,8 @@ function table() {
 }
 q('#pager').addEventListener('click', e => { const b = e.target.closest('[data-go]'); if (b && !b.disabled) { st.p = +b.dataset.go; table(); q('#rows').scrollIntoView({ block: 'center' }); } });
 ['f-q', 'f-b', 'f-s'].forEach(id => q('#' + id).addEventListener('input', () => { st.p = 1; table(); }));
-q('#f-y').addEventListener('change', () => { st.p = 1; summary(); table(); });
+q('#f-y').addEventListener('change', () => { st.p = 1; summary(); table(); updateOfficialPdf(); });
+updateOfficialPdf();
 
 // Download: Excel (CSV) and PDF (print dialog), using the currently filtered rows
 q('#dl-xls').addEventListener('click', () => {
@@ -112,6 +117,6 @@ q('#dl-pdf').addEventListener('click', () => {
   </tbody></table>`;
   window.print();
 });
-summary(); table();
+summary(); table(); updateOfficialPdf();
 </script>
 @endpush

@@ -21,7 +21,13 @@
   - Beranda mengambil potensi dan galeri aktif berurutan dari database; filter kategori dan lightbox tetap memakai struktur view lama.
   - Seeder memindahkan lima potensi dan enam item galeri dari `config/village.php` tanpa data baru.
   - Regression gabungan Fase 1–4 lulus: 16 test, 30 assertion.
-- Fase 5 (APBDes, realisasi, lampiran laporan PDF): belum
+- Fase 5 (APBDes, realisasi, lampiran laporan PDF): selesai — 19 November 2026
+  - menambahkan tabel tahun anggaran, bidang, pendapatan, pembiayaan, dan kegiatan dengan nominal `bigInteger` rupiah penuh.
+  - Dashboard Filament Tahun Anggaran mengelola rincian pendapatan, pembiayaan, dan kegiatan melalui relation manager; realisasi dibatasi tidak melebihi anggaran.
+  - Seeder memindahkan data dummy tahun 2025 dan 2026 beserta lima bidang dari `config/sipades.php`.
+  - `BudgetDataService` membentuk struktur lama `sipades.years` dan `sipades.bidang` untuk JavaScript halaman APBDes/Realisasi.
+  - Halaman Realisasi menyediakan unduh laporan resmi PDF per tahun jika tersedia; tombol CSV dan cetak lama tetap dipertahankan.
+  - Regression gabungan Fase 1–5 lulus: 20 test, 38 assertion.
 - Fase 6 (informasi pembangunan, dokumen publik): belum
 - Fase 7 (pembersihan, keamanan, test): belum
 

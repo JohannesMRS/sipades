@@ -7,7 +7,7 @@
   <div class="container-x">
     <div class="flex justify-end mb-4">
       <label class="flex items-center gap-2 text-sm font-semibold">Tahun anggaran
-        <select id="year" class="field !w-auto">@foreach(array_keys(config('sipades.years')) as $y)<option>{{ $y }}</option>@endforeach</select>
+        <select id="year" class="field !w-auto">@foreach(array_keys($budget['years']) as $y)<option value="{{ $y }}">{{ $y }}</option>@endforeach</select>
       </label>
     </div>
 
@@ -48,7 +48,7 @@
 
 @push('scripts')
 <script>
-const D = @json(config('sipades.years')), BID = @json(config('sipades.bidang'));
+const D = @json($budget['years']), BID = @json($budget['bidang']);
 const hdr = `<div class="hidden sm:grid grid-cols-[1fr_11rem_11rem] gap-x-4 text-xs font-semibold text-muted pb-2"><span>Uraian</span><span>Anggaran</span><span>Realisasi</span></div>`;
 const row = (n, b, r, strong) => `<div class="grid sm:grid-cols-[1fr_11rem_11rem] gap-x-4 gap-y-1 py-3 border-t border-[var(--line)] items-center ${strong ? 'font-bold' : ''}">
   <p class="${strong ? '' : 'font-medium'}">${n}</p>
