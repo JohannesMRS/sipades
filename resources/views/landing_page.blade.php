@@ -244,6 +244,7 @@
   <div class="border-t border-white/15">
     <div class="container-x py-5 flex flex-wrap justify-between gap-3 text-xs text-white/70">
       <p>© {{ date('Y') }} {{ $v['name'] }}. Hak cipta dilindungi.</p>
+      <p>Ini adalah proyek mata kuliah semata, kesamaan nama, alamat, dan lain-lain merupakan ketidaksengajaan</p>
       <p class="flex gap-4"><a href="#" class="hover:text-white">Kebijakan Privasi</a><a href="#" class="hover:text-white">Syarat Layanan</a></p>
     </div>
   </div>
