@@ -15,13 +15,17 @@ class IncomesRelationManager extends RelationManager
 {
     protected static string $relationship = 'incomes';
 
+    protected static ?string $title = 'Rincian Pendapatan';
+
     public function form(Schema $schema): Schema
     {
         return $schema
             ->components([
                 TextInput::make('group')
+                    ->label('Kelompok')
                     ->required(),
                 TextInput::make('name')
+                    ->label('Nama')
                     ->required(),
                 TextInput::make('budget_amount')
                     ->label('Anggaran')
@@ -44,20 +48,26 @@ class IncomesRelationManager extends RelationManager
             ->recordTitleAttribute('name')
             ->columns([
                 TextColumn::make('group')
+                    ->label('Kelompok')
                     ->searchable(),
                 TextColumn::make('name')
+                    ->label('Nama')
                     ->searchable(),
                 TextColumn::make('budget_amount')
+                    ->label('Anggaran')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('realized_amount')
+                    ->label('Realisasi')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('created_at')
+                    ->label('Dibuat')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label('Diperbarui')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

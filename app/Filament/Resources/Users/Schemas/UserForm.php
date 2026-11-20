@@ -15,13 +15,16 @@ class UserForm
         return $schema
             ->components([
                 TextInput::make('name')
+                    ->label('Nama')
                     ->required(),
                 TextInput::make('email')
-                    ->label('Email address')
+                    ->label('Alamat Email')
                     ->email()
                     ->required(),
-                DateTimePicker::make('email_verified_at'),
+                DateTimePicker::make('email_verified_at')
+                    ->label('Email Terverifikasi Pada'),
                 TextInput::make('password')
+                    ->label('Kata Sandi')
                     ->password()
                     ->revealable()
                     ->minLength(8)

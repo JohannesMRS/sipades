@@ -16,17 +16,22 @@ class BudgetYearsTable
         return $table
             ->columns([
                 TextColumn::make('year')
+                    ->label('Tahun Anggaran')
                     ->numeric()
                     ->sortable(),
                 IconColumn::make('is_active')
+                    ->label('Aktif')
                     ->boolean(),
                 TextColumn::make('report_pdf')
+                    ->label('Laporan Resmi PDF')
                     ->searchable(),
                 TextColumn::make('created_at')
+                    ->label('Dibuat')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label('Diperbarui')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

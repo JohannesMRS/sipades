@@ -19,18 +19,23 @@ class PerangkatDesasTable
             ->defaultSort('sort_order')
             ->columns([
                 TextColumn::make('name')
+                    ->label('Nama')
                     ->searchable(),
                 TextColumn::make('position')
+                    ->label('Jabatan')
                     ->searchable(),
                 ImageColumn::make('image')
+                    ->label('Foto')
                     ->disk('public')
                     ->visibility('public')
                     ->square(),
                 TextColumn::make('created_at')
+                    ->label('Dibuat')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label('Diperbarui')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

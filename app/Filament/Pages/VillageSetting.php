@@ -3,6 +3,7 @@
 namespace App\Filament\Pages;
 
 use App\Models\VillageSetting as VillageSettingModel;
+use BackedEnum;
 use Filament\Actions\Action;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Textarea;
@@ -10,12 +11,22 @@ use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
+use UnitEnum;
 
 class VillageSetting extends Page
 {
     public ?array $data = [];
 
     protected static ?string $navigationLabel = 'Pengaturan Desa';
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedAdjustmentsHorizontal;
+
+    protected static string|BackedEnum|null $activeNavigationIcon = Heroicon::AdjustmentsHorizontal;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Pengaturan Desa';
+
+    protected static ?int $navigationSort = 1;
 
     protected static ?string $title = 'Pengaturan Desa';
 

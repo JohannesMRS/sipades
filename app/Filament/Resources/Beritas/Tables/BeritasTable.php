@@ -16,17 +16,27 @@ class BeritasTable
     {
         return $table
             ->columns([
-                ImageColumn::make('image')->disk('public')->visibility('public')->square(),
+                ImageColumn::make('image')->label('Gambar')->disk('public')->visibility('public')->square(),
                 TextColumn::make('title')->label('Judul')->searchable()->wrap(),
                 TextColumn::make('category.name')->label('Kategori')->sortable(),
-                TextColumn::make('status')->label('Status')->badge()->sortable(),
+                TextColumn::make('status')
+                    ->label('Status')
+                    ->badge()
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'draft' => 'Draf',
+                        'terbit' => 'Terbit',
+                        default => '—',
+                    })
+                    ->sortable(),
                 TextColumn::make('published_at')->label('Tanggal Terbit')->dateTime()->sortable(),
                 IconColumn::make('is_featured')->label('Disematkan')->boolean(),
                 TextColumn::make('created_at')
+                    ->label('Dibuat')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label('Diperbarui')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

@@ -7,6 +7,7 @@ use App\Models\Gallery;
 use App\Models\PerangkatDesa;
 use App\Models\PotensiDesa;
 use App\Models\VillageSetting;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Carbon::setLocale(config('app.locale'));
+
         View::composer('landing_page', function ($view): void {
             $fallback = config('village', []);
             $setting = VillageSetting::query()->find(1);

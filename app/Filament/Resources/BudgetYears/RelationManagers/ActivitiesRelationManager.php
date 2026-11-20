@@ -18,6 +18,8 @@ class ActivitiesRelationManager extends RelationManager
 {
     protected static string $relationship = 'activities';
 
+    protected static ?string $title = 'Rincian Kegiatan';
+
     public function form(Schema $schema): Schema
     {
         return $schema
@@ -40,26 +42,33 @@ class ActivitiesRelationManager extends RelationManager
             ->recordTitleAttribute('name')
             ->columns([
                 TextColumn::make('budget_field_id')
+                    ->label('ID Bidang')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('name')
+                    ->label('Nama Kegiatan')
                     ->searchable(),
                 TextColumn::make('budget_amount')
+                    ->label('Anggaran')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('realized_amount')
+                    ->label('Realisasi')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('status')
+                    ->label('Status')
                     ->searchable(),
                 TextColumn::make('field.name')
                     ->label('Bidang')
                     ->sortable(),
                 TextColumn::make('created_at')
+                    ->label('Dibuat')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label('Diperbarui')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

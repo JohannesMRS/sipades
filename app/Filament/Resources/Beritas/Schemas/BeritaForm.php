@@ -26,7 +26,7 @@ class BeritaForm
                 RichEditor::make('content')->label('Isi'),
                 FileUpload::make('image')->label('Gambar')->image()->disk('public')->directory('berita')
                     ->visibility('public')->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])->maxSize(2048)->nullable(),
-                Select::make('status')->label('Status')->options(['draft' => 'Draft', 'terbit' => 'Terbit'])->required()->default('draft'),
+                Select::make('status')->label('Status')->options(['draft' => 'Draf', 'terbit' => 'Terbit'])->required()->default('draft'),
                 DateTimePicker::make('published_at')->label('Tanggal Terbit')->native(false),
                 Toggle::make('is_featured')->label('Disematkan')->default(false),
             ]);

@@ -21,6 +21,8 @@ class DocumentationRelationManager extends RelationManager
 {
     protected static string $relationship = 'documentation';
 
+    protected static ?string $title = 'Dokumentasi Pembangunan';
+
     public function form(Schema $schema): Schema
     {
         return $schema
@@ -34,8 +36,10 @@ class DocumentationRelationManager extends RelationManager
                     ])
                     ->required(),
                 DatePicker::make('date')
+                    ->label('Tanggal')
                     ->required(),
                 Textarea::make('caption')
+                    ->label('Keterangan')
                     ->required()
                     ->columnSpanFull(),
                 FileUpload::make('image')
@@ -56,16 +60,20 @@ class DocumentationRelationManager extends RelationManager
             ->recordTitleAttribute('stage')
             ->columns([
                 TextColumn::make('stage')
+                    ->label('Tahap')
                     ->searchable(),
                 TextColumn::make('date')
+                    ->label('Tanggal')
                     ->date()
                     ->sortable(),
-                ImageColumn::make('image'),
+                ImageColumn::make('image')->label('Foto'),
                 TextColumn::make('created_at')
+                    ->label('Dibuat')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label('Diperbarui')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

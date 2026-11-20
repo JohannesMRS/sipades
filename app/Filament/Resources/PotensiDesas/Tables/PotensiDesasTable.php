@@ -18,7 +18,7 @@ class PotensiDesasTable
             ->reorderable('sort_order')
             ->defaultSort('sort_order')
             ->columns([
-                ImageColumn::make('image')->disk('public')->visibility('public')->square(),
+                ImageColumn::make('image')->label('Gambar')->disk('public')->visibility('public')->square(),
                 TextColumn::make('title')->label('Judul')->searchable()->wrap(),
                 TextColumn::make('category')->label('Kategori')->searchable()->sortable(),
                 TextColumn::make('sort_order')->label('Urutan')->sortable(),

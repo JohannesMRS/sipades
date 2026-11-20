@@ -18,6 +18,8 @@ class FinancingRelationManager extends RelationManager
 {
     protected static string $relationship = 'financing';
 
+    protected static ?string $title = 'Rincian Pembiayaan';
+
     public function form(Schema $schema): Schema
     {
         return $schema
@@ -38,6 +40,7 @@ class FinancingRelationManager extends RelationManager
             ->recordTitleAttribute('name')
             ->columns([
                 TextColumn::make('name')
+                    ->label('Nama')
                     ->searchable(),
             ])
             ->filters([

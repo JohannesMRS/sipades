@@ -16,12 +16,25 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class BudgetYearResource extends Resource
 {
     protected static ?string $model = BudgetYear::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBanknotes;
+
+    protected static string|BackedEnum|null $activeNavigationIcon = Heroicon::Banknotes;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Transparansi';
+
+    protected static ?int $navigationSort = 1;
+
+    protected static ?string $navigationLabel = 'Tahun Anggaran';
+
+    protected static ?string $modelLabel = 'Tahun Anggaran';
+
+    protected static ?string $pluralModelLabel = 'Tahun Anggaran';
 
     public static function form(Schema $schema): Schema
     {

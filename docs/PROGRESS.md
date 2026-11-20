@@ -42,6 +42,14 @@
   - Suite PHPUnit lengkap lulus: 31 test, 60 assertion.
   - Checklist belum beres: penghapusan file config dummy masih menunggu persetujuan; backup rutin PostgreSQL dan `storage/app/public` perlu dijadwalkan di lingkungan produksi.
 
+- Fase 8 (dashboard admin kustom, ikon, bahasa, grup navigasi): selesai — 20 November 2026
+  - Dashboard kustom `App\Filament\Pages\Dashboard` menggantikan dashboard dan widget bawaan Filament; tersedia kartu ringkasan database, checklist kelengkapan, lima berita terbaru, aksi cepat, serta tautan website.
+  - Grup navigasi final: Pengaturan Desa (Pengaturan Desa, Perangkat Desa, Potensi Desa, Galeri), Informasi (Berita, Kategori Berita), Transparansi (Tahun Anggaran, Pembangunan, Dokumen Publik), dan Pengguna (Akun Perangkat Desa; hanya admin).
+  - Ikon outline/aktif per menu: Dashboard Home, Pengaturan Desa AdjustmentsHorizontal, Perangkat Desa Identification, Potensi Desa Sparkles, Galeri Photo, Berita Newspaper, Kategori Berita Tag, Tahun Anggaran Banknotes, Pembangunan BuildingOffice, Dokumen Publik DocumentText, Akun Perangkat Desa Key.
+  - Locale aplikasi dan Carbon menggunakan Bahasa Indonesia; branding panel/login memakai logo desa bila tersedia, tanpa widget informasi bawaan, dan mode gelap dinonaktifkan.
+  - Label navigasi, field/tabel, relasi, status berita, validasi, serta teks profil dan keluar menggunakan Bahasa Indonesia; policy akun tetap tidak berubah.
+  - Tes dashboard admin/operator, login, statistik berbasis database, navigasi, dan lokalisasi lulus; suite PHPUnit lengkap: 29 test lulus.
+
 ## Catatan penting dari fase sebelumnya
 - Lingkungan aktual: PHP 8.5.4, Laravel 13.40.0, Tailwind CSS 4.3.5, Vite 8.3.8.
 - Beranda memakai `resources/views/landing_page.blade.php`, bukan `landing.blade.php`.

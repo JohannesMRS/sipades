@@ -13,12 +13,19 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class BeritaResource extends Resource
 {
     protected static ?string $model = Berita::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedNewspaper;
+
+    protected static string|BackedEnum|null $activeNavigationIcon = Heroicon::Newspaper;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Informasi';
+
+    protected static ?int $navigationSort = 1;
 
     protected static ?string $navigationLabel = 'Berita';
 

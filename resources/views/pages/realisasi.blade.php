@@ -70,6 +70,15 @@ const badge = s => s === 'Selesai' ? 'badge' : s === 'Sedang Berjalan' ? 'badge 
 const set = (id, v) => q('#' + id).textContent = v;
 const yr = () => q('#f-y').value;
 const acts = () => D[yr()].activities;
+function updateOfficialPdf() {
+  const link = q('#dl-official-pdf');
+  if (!link) return;
+
+  const path = REPORT_PDFS[yr()];
+  link.classList.toggle('hidden', !path);
+
+  if (path) link.href = path;
+}
 const filtered = () => acts().filter(x =>
   x[0].toLowerCase().includes(q('#f-q').value.trim().toLowerCase()) &&
   (!q('#f-b').value || x[1] == q('#f-b').value) && (!q('#f-s').value || x[4] === q('#f-s').value));

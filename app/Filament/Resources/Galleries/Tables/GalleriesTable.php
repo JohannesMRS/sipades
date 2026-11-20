@@ -18,7 +18,7 @@ class GalleriesTable
             ->reorderable('sort_order')
             ->defaultSort('sort_order')
             ->columns([
-                ImageColumn::make('image')->disk('public')->visibility('public')->square(),
+                ImageColumn::make('image')->label('Gambar')->disk('public')->visibility('public')->square(),
                 TextColumn::make('category')->label('Kategori')->searchable()->sortable(),
                 TextColumn::make('alt')->label('Keterangan')->searchable()->wrap(),
                 TextColumn::make('sort_order')->label('Urutan')->sortable(),
