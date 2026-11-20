@@ -84,6 +84,24 @@ class AppServiceProvider extends ServiceProvider
             $village['name'] = $setting?->name ?: ($fallback['name'] ?? '—');
             $village['tagline'] = $setting?->tagline ?: ($fallback['tagline'] ?? '—');
             $village['logo'] = $setting?->logo ?: ($fallback['logo'] ?? 'images/logo.png');
+            $profileImage = $setting?->foto_profil;
+            $profileMissions = is_array($setting?->misi) ? $setting->misi : [];
+            $village['profile'] = [
+                'description' => $setting?->deskripsi_singkat,
+                'image' => filled($profileImage)
+                    ? (str_starts_with($profileImage, 'http://') || str_starts_with($profileImage, 'https://')
+                        ? $profileImage
+                        : '/storage/'.ltrim($profileImage, '/'))
+                    : '/images/desa.jpg',
+                'has_content' => filled(trim(strip_tags((string) $setting?->sejarah)))
+                    || filled($setting?->visi)
+                    || collect($profileMissions)->contains(fn ($mission): bool => filled($mission))
+                    || filled(trim(strip_tags((string) $setting?->letak_geografis)))
+                    || filled($setting?->batas_utara)
+                    || filled($setting?->batas_selatan)
+                    || filled($setting?->batas_timur)
+                    || filled($setting?->batas_barat),
+            ];
             $village['officials'] = $officials ?: ($fallback['officials'] ?? []);
             $village['stats'] = [
                 ['icon' => 'users', 'value' => $setting?->population === null ? '—' : number_format((int) $setting->population, 0, ',', '.'), 'label' => 'Jumlah Penduduk'],

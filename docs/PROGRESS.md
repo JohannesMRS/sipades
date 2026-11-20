@@ -50,6 +50,14 @@
   - Label navigasi, field/tabel, relasi, status berita, validasi, serta teks profil dan keluar menggunakan Bahasa Indonesia; policy akun tetap tidak berubah.
   - Tes dashboard admin/operator, login, statistik berbasis database, navigasi, dan lokalisasi lulus; suite PHPUnit lengkap: 29 test lulus.
 
+- Fase 9 (profil desa: deskripsi, foto, halaman /profil-desa): selesai — 20 November 2026
+  - Menambahkan kolom nullable `deskripsi_singkat`, `foto_profil`, `sejarah`, `visi`, `misi`, `letak_geografis`, `batas_utara`, `batas_selatan`, `batas_timur`, dan `batas_barat` pada `village_settings`; seeder tidak mengisi konten profil.
+  - Pengaturan Filament memakai tab Umum, Statistik, Kontak, dan Profil; foto profil menerima JPG/PNG/WebP hingga 3 MB dengan editor rasio 9:7, sedangkan misi tersimpan sebagai JSON.
+  - Beranda memakai deskripsi singkat dan foto profil dari database; fallback foto `/images/desa.jpg`, dan tombol selengkapnya hanya tampil jika konten profil lengkap tersedia.
+  - Menambahkan route bernama `profil-desa` dengan view `resources/views/pages/profil-desa.blade.php`; setiap blok kondisional, rich text disanitasi, data ringkas memakai field pengaturan lama, serta empty state tersedia.
+  - Navigasi halaman layanan tetap menuju `/#profil`; halaman profil menggunakan meta description dari deskripsi singkat bila tersedia dan tata letak responsif.
+  - Tes profil kosong, konten sebagian/sanitasi, foto/deskripsi beranda, visibilitas tombol, dan tab dashboard lulus; suite PHPUnit lengkap: 34 test lulus.
+
 ## Catatan penting dari fase sebelumnya
 - Lingkungan aktual: PHP 8.5.4, Laravel 13.40.0, Tailwind CSS 4.3.5, Vite 8.3.8.
 - Beranda memakai `resources/views/landing_page.blade.php`, bukan `landing.blade.php`.

@@ -82,13 +82,17 @@
     <div class="relative order-2 md:order-1 reveal">
       <div class="absolute inset-0 translate-x-3 translate-y-3 md:translate-x-4 md:translate-y-4 rounded-md border-2 border-[var(--amber)]"></div>
       <div class="relative aspect-[9/7] overflow-hidden rounded-md bg-soft">
-        <img class="img-cover" loading="lazy" src="{{ $v['images']['profile'] }}" alt="Suasana {{ $v['name'] }}">
+        <img class="img-cover" loading="lazy" src="{{ $v['profile']['image'] ?? '/images/desa.jpg' }}" alt="Suasana {{ $v['name'] }}">
       </div>
     </div>
     <div class="order-1 md:order-2 reveal">
       <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold">Mengenal Lebih Dekat Desa Kami</h2>
-      <p class="mt-4 text-white/85"></p>
-      <a href="#" class="btn btn-light mt-6 w-full sm:w-auto">Selengkapnya Tentang Desa</a>
+      @if(filled($v['profile']['description'] ?? null))
+        <p class="mt-4 text-white/85">{{ $v['profile']['description'] }}</p>
+      @endif
+      @if($v['profile']['has_content'] ?? false)
+        <a href="{{ route('profil-desa') }}" class="btn btn-light mt-6 w-full sm:w-auto">Selengkapnya Tentang Desa</a>
+      @endif
     </div>
   </div>
 </section>
